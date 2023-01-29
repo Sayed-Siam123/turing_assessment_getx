@@ -52,7 +52,6 @@ class PlaceDetailsLogic extends GetxController {
     lng.value = data.data["result"]["geometry"]["location"]["lng"];
     placeID.value = data.data["result"]["place_id"].toString();
 
-    print(data.data["result"]["photos"]);
     getPhotos(photos: data.data["result"]["photos"] as List);
 
     await Future.delayed(Duration(seconds: 2));
@@ -63,8 +62,6 @@ class PlaceDetailsLogic extends GetxController {
     for(int i = 0; i<photos.length; i++){
       photosList.value.add(photos[i]["photo_reference"]);
     }
-
-    print(photosList.value);
   }
 
 }
