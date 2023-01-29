@@ -1,7 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:get/get.dart';
+import 'package:turing_assessment_getx/widgets/textwidgets.dart';
 
 import '../../helper/internet_checker_helper/internet_checker_helper_logic.dart';
+import '../../shared/constants/ConstantSize.dart';
+import '../../shared/constants/colors.dart';
 import 'place_details_logic.dart';
 
 class PlaceDetailsPage extends GetView<PlaceDetailsLogic> {
@@ -11,6 +16,56 @@ class PlaceDetailsPage extends GetView<PlaceDetailsLogic> {
   Widget build(BuildContext context) {
     Get.find<PlaceDetailsLogic>();
     Get.find<InternetCheckerHelperLogic>();
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(controller.name.value.toString()),
+      ),
+      body: Obx(() {
+        return Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              FlutterCarousel(
+                options: CarouselOptions(
+                    viewportFraction: 1,
+                    height: 200.0,
+                    showIndicator: true,
+                    floatingIndicator: true,
+                    onPageChanged: (index, reason) {
+                      controller.currentIndex.value = index;
+                    }
+                ),
+                items: controller.photosList.value.map((photoItem) {
+                  return Builder(
+                    builder: (BuildContext context) {
+                      // return Container(
+                      //   decoration: BoxDecoration(
+                      //     color: ColorConstants.WHITE,
+                      //   ),
+                      //   child: Text(photoItem.toString()),
+                      // );
+                      print(photoItem);
+                      return CachedNetworkImage(
+                        imageUrl: "https://maps.googleapis.com/maps/api/place/photo?photoreference=$photoItem&sensor=false&key=AIzaSyCBkUYS9WF-PtOKtHoWz5yqkEhqt4OMiRg",
+                        progressIndicatorBuilder: (context, url,
+                            downloadProgress) =>
+                            CircularProgressIndicator(
+                                value: downloadProgress.progress),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      );
+                    },
+
+                  );
+                }).toList(),
+              ),
+              SizedBox(height: 20),
+              TextBoxConstant.textWidget(text: controller.name.value.toString()),
+              TextBoxConstant.textWidget(text: controller.address.value.toString()),
+            ],
+          ),
+        );
+      }),
+    );
   }
 }

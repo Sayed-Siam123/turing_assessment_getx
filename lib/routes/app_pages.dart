@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:turing_assessment_getx/helper/internet_checker_helper/internet_checker_helper_binding.dart';
 import 'package:turing_assessment_getx/modules/dashboard/dashboard_binding.dart';
+import 'package:turing_assessment_getx/modules/place_details/place_details_binding.dart';
 import 'package:turing_assessment_getx/modules/place_details/place_details_view.dart';
 import 'package:turing_assessment_getx/modules/splash/splash_view.dart';
 
@@ -35,7 +36,7 @@ class AppPages {
         name: Routes.PLACEDETAILS,
         page: () => const PlaceDetailsPage(),
         bindings: [
-          DashboardBinding(),
+          PlaceDetailsBinding(),
           InternetCheckerHelperBinding(),
         ]
     ),
