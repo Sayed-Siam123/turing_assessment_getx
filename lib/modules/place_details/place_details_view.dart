@@ -30,8 +30,8 @@ class PlaceDetailsPage extends GetView<PlaceDetailsLogic> {
                 options: CarouselOptions(
                     viewportFraction: 1,
                     height: 200.0,
-                    showIndicator: true,
-                    floatingIndicator: true,
+                    showIndicator: false,
+                    floatingIndicator: false,
                     onPageChanged: (index, reason) {
                       controller.currentIndex.value = index;
                     }
@@ -46,16 +46,10 @@ class PlaceDetailsPage extends GetView<PlaceDetailsLogic> {
                       //   child: Text(photoItem.toString()),
                       // );
                       print(photoItem);
-                      return CachedNetworkImage(
-                        imageUrl: "https://maps.googleapis.com/maps/api/place/photo?photoreference=$photoItem&sensor=false&key=AIzaSyCBkUYS9WF-PtOKtHoWz5yqkEhqt4OMiRg",
-                        progressIndicatorBuilder: (context, url,
-                            downloadProgress) =>
-                            CircularProgressIndicator(
-                                value: downloadProgress.progress),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      return Image.network(
+                        "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&maxheight=200&photoreference=$photoItem&key=AIzaSyCBkUYS9WF-PtOKtHoWz5yqkEhqt4OMiRg",
                       );
                     },
-
                   );
                 }).toList(),
               ),
