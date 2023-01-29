@@ -38,19 +38,19 @@ class InternetCheckerHelperLogic extends GetxController {
     switch (result) {
       case ConnectivityResult.wifi:
         if(connectionType.value == 3){
-          SnackBarHelper.openSnackBar(message: 'Internet connected!',isError: false);
+          //SnackBarHelper.openSnackBar(message: 'Internet connected!',isError: false);
           connectionType.value = 1;
         }
         break;
       case ConnectivityResult.mobile:
         if(connectionType.value == 3){
-          SnackBarHelper.openSnackBar(message: 'Internet connected!',isError: false);
+          //SnackBarHelper.openSnackBar(message: 'Internet connected!',isError: false);
           connectionType.value = 2;
         }
         break;
       case ConnectivityResult.none:
         connectionType.value = 3;
-        SnackBarHelper.openSnackBar(message: 'No internet',isError: true);
+        //SnackBarHelper.openSnackBar(message: 'No internet',isError: true);
         break;
       default:
         SnackBarHelper.openSnackBar(message: 'Failed to get connection type',isError: true);
